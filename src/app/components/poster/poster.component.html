@@ -1,0 +1,3 @@
+<input type="file" (change)="fileChange($event)" class="poster">
+
+<img *ngFor="let poster of posterList" [src]="poster" (click)="change.emit(poster)" class="poster"/>

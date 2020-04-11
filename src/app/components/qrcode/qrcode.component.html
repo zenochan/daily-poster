@@ -1,0 +1,2 @@
+<input type="file" (change)="fileChange($event)" class="qrcode">
+<img *ngFor="let item of qrcodeList" [src]="item" class="qrcode" (click)="change.emit(item)"/>
