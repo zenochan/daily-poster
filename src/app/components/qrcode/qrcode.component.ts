@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-qrcode',
@@ -7,12 +7,15 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class QrcodeComponent implements OnInit
 {
-  qrcodeList = [];
+  qrcodeList: ImageInfo[] = [];
+
+  @Input()
+  poster: ImageInfo;
+
+  @Input()
+  options: PositionInfo;
 
   constructor() { }
-
-  @Output()
-  public change = new EventEmitter<string>();
 
   ngOnInit(): void
   {
@@ -21,14 +24,15 @@ export class QrcodeComponent implements OnInit
   fileChange($event: Event)
   {
     const input: any = event.target;
-    const reader = new FileReader();
-    reader.onload = () => {
-      // const database64 = reader.result.replace(/^data:image\/(jpeg|jpg);base64,/, '');
-      this.qrcodeList.unshift(reader.result.toString());
-      this.qrcodeList = Array.from(new Set(this.qrcodeList));
-      this.change.emit(reader.result.toString());
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
+    this.qrcodeList = [];
 
+    Object.values(input.files).forEach((file: File) => {
+      const reader = new FileReader();
+      reader.onload = () => this.qrcodeList.unshift({
+        name: file.name.replace(/.[^.]+$/, ''),
+        base64: reader.result.toString()
+      });
+      reader.readAsDataURL(file);
+    });
+  }
 }

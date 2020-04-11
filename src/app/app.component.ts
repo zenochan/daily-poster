@@ -1,92 +1,43 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, OnChanges, SimpleChanges} from '@angular/core';
+import {DownloadService} from './download.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit
+export class AppComponent
 {
   title = 'daily-poster';
+  poster: ImageInfo;
 
-  qrcode = {
-    x: 300,
-    y: 470,
-    w: 480,
-    h: 480
-  };
-
-  posterUrl: string;
-  qrcodeUrl: string;
-
-
-  @ViewChild('canvas')
-  canvas: ElementRef;
-  height = 1920;
-
-  // canvasEl: HTMLCanvasElement;
-
-  get ctx()
+  constructor(private downloadService: DownloadService)
   {
-    return (this.canvas.nativeElement as HTMLCanvasElement).getContext('2d');
   }
 
-  ngAfterViewInit(): void
-  {
-    console.error(this.canvas.nativeElement);
-  }
+  options: PositionInfo = {x: 381, y: 560, w: 437, h: 437};
 
-  onPosterChange(poster: string)
-  {
-    this.posterUrl = poster;
-    this.draw();
-    // this.checkPicurl(poster);
+  preset: PositionInfo[] = [
+    {name: '日历预设', x: 46, y: 1728, w: 170, h: 170},
+    {name: '单款预设', x: 381, y: 560, w: 437, h: 437},
+  ];
 
+  refresh()
+  {
+    this.downloadService.redrawEvent.emit(true);
 
   }
 
-
-  onQrcdeChange(url: string)
-  {
-    this.qrcodeUrl = url;
-    this.draw();
-  }
-
-  draw()
-  {
-    const image = new Image();
-    image.src = this.posterUrl;
-    image.onload = () => {
-      this.height = 1080 * image.height / image.width;
-      this.ctx.clearRect(0, 0, 375, this.height);
-      this.ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, 1080, this.height);
-    };
-
-    if (this.qrcodeUrl) {
-      const qrcode = new Image();
-      qrcode.src = this.qrcodeUrl;
-      qrcode.onload = () => {
-        this.ctx.drawImage(qrcode,
-            0, 0, qrcode.width, qrcode.height,
-            this.qrcode.x, this.qrcode.y, this.qrcode.w, this.qrcode.h
-        );
-      };
-    }
-  }
 
   save()
   {
-    const canvas = this.canvas.nativeElement;
-    const strDataURI = canvas.toDataURL('image/jpeg');
+    this.downloadService.downloadEvent.emit(true);
+  }
 
-    const a = document.createElement('a');
-    a.href = strDataURI;
-    a.download = '顾问';
-    a.click();
-
-    // window.open(strDataURI, '_blank');
-    // const image = strDataURI.replace('image/jpeg', 'image/octet-stream');
-    // window.location.href = image;
+  setOptions(info: PositionInfo)
+  {
+    this.options = JSON.parse(JSON.stringify(info));
+    this.refresh();
   }
 }
 

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-poster',
@@ -8,10 +8,11 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 export class PosterComponent implements OnInit
 {
 
-  posterList: string[] = [];
+  @Input()
+  poster: ImageInfo;
 
   @Output()
-  change = new EventEmitter<string>();
+  posterChange = new EventEmitter<ImageInfo>();
 
   constructor() { }
 
@@ -23,14 +24,16 @@ export class PosterComponent implements OnInit
   fileChange($event: Event)
   {
     const input: any = event.target;
-    const reader = new FileReader();
-    reader.onload = () => {
-      // const database64 = reader.result.replace(/^data:image\/(jpeg|jpg);base64,/, '');
-      this.posterList.unshift(reader.result.toString());
-      this.posterList = Array.from(new Set(this.posterList));
-      this.change.emit(reader.result.toString());
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
 
+    const reader = new FileReader();
+    const file: File = input.files[0];
+    reader.onload = () => {
+      this.poster = {
+        name: file.name.replace(/.[^.]+$/, ''),
+        base64: reader.result.toString()
+      };
+      this.posterChange.emit(this.poster);
+    };
+    reader.readAsDataURL(file);
+  }
 }

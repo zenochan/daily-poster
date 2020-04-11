@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import {PosterComponent} from './components/poster/poster.component';
 import { QrcodeComponent } from './components/qrcode/qrcode.component';
 import {FormsModule} from '@angular/forms';
+import { IntegrationComponent } from './components/integration/integration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PosterComponent,
-    QrcodeComponent
+    QrcodeComponent,
+    IntegrationComponent
   ],
   imports: [
     BrowserModule,

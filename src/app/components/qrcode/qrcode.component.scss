@@ -1,10 +1,30 @@
 .qrcode {
-  width: 100px;
-  height: 100px;
   margin: 12px;
   box-sizing: border-box;
-  float: left;
+  width: 180px;
+  height: 320px;
+  vertical-align: top;
 }
-input{
+
+input {
   border: 2px solid #eee;
+  height: 180px;
+  position: relative;
+
+  &:after {
+    content: "选择二维码  可拖动选择";
+    line-height: 32px;
+    background: white;
+    position: absolute;
+    white-space: normal;
+    text-align: center;
+    font-size: 16px;
+    color: #bd423a;
+    font-weight: bolder;
+    padding: 80px 40px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 }

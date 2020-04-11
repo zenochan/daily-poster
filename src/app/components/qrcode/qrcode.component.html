@@ -1,2 +1,7 @@
-<input type="file" (change)="fileChange($event)" class="qrcode">
-<img *ngFor="let item of qrcodeList" [src]="item" class="qrcode" (click)="change.emit(item)"/>
+<div style="white-space: nowrap">
+  <input type="file" (change)="fileChange($event)" class="qrcode" multiple accept="image/*">
+  <app-integration class="qrcode" *ngFor="let qrcode of qrcodeList"
+                   [poster]="poster" [qrcode]="qrcode"
+                   [options]="options"
+  ></app-integration>
+</div>

@@ -1,14 +1,32 @@
-
-.poster{
+.poster {
   width: 180px;
   height: 320px;
   margin: 12px;
-  float: left;
   box-sizing: border-box;
+  vertical-align: top;
 }
 
-input{
+input {
   border: 2px solid #eee;
+  position: relative;
+
+  &:after {
+    content: "选择LOOK可拖动选择";
+    line-height: 32px;
+    background: white;
+    position: absolute;
+    white-space: normal;
+    font-size: 16px;
+    color: #bd423a;
+    font-weight: bolder;
+    padding: 80px 48px;
+    text-align: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 }
+
 
 

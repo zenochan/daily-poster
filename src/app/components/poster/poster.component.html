@@ -1,3 +1,2 @@
-<input type="file" (change)="fileChange($event)" class="poster">
-
-<img *ngFor="let poster of posterList" [src]="poster" (click)="change.emit(poster)" class="poster"/>
+<input type="file" (change)="fileChange($event)" class="poster" accept="image/*">
+<img [src]="poster.base64" class="poster" style="height: unset"/>

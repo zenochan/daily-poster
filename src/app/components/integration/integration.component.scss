@@ -1,0 +1,11 @@
+.integration-ctn {
+  width: 200px;
+  height: 400px;
+  overflow: hidden;
+  display: inline-block;
+}
+
+canvas {
+  transform: scale(0.167);
+  transform-origin: 0 0;
+}
