@@ -19,7 +19,7 @@ export class SaleDataComponent implements OnInit
     setInterval(() => {
       this.countdown--;
       if (this.countdown <= 0) {
-        // this.getData();
+        this.getData();
         this.countdown = 60;
       }
     }, 1000);
