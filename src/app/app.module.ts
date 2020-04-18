@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms';
 import {IntegrationComponent} from './components/integration/integration.component';
 import {SaleDataComponent} from './components/sale-data/sale-data.component';
 import {HttpClientModule} from "@angular/common/http";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {HttpClientModule} from "@angular/common/http";
     PosterComponent,
     QrcodeComponent,
     IntegrationComponent,
-    SaleDataComponent
+    SaleDataComponent,
+    HomeComponent
   ],
   imports: [
     HttpClientModule,

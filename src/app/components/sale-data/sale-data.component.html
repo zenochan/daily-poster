@@ -1,1 +1,14 @@
-<p>sale-data works!</p>
+<div style="display: flex;flex-direction: column;height: 100vh">
+  <div class="header">
+    <div class="amount">{{saleData?.amount|number:'0.2'}}</div>
+    <div>最后更新: {{saleData?.current_time|date:'HH:mm:ss'}}   ({{countdown}}s 后刷新)</div>
+  </div>
+
+  <div class="sale-man__ctn" style="flex: 1;overflow: scroll">
+    <div *ngFor="let item of saleData?.result;let i=index" class="sale-man">
+      <div class="no">{{i + 1}}</div>
+      <div class="name">{{item.name}}</div>
+      <div class="total">{{item.total_amount|number:'0.2'}}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+:host {
+  font-family: "Input Mono Condensed";
+}
+
+.header {
+  background: #bd423a;
+  color: white;
+  padding: 12px 24px;
+}
+
+.amount {
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.sale-man {
+  display: flex;
+  width: 100%;
+  color: #333;
+  align-items: center;
+  height: 32px;
+  padding: 0 1em;
+  box-sizing: border-box;
+
+  &:nth-child(2n+1) {
+    background: #f3f3f3;
+  }
+
+  .no {
+    width: 1em;
+    margin-right: 1em;
+    color: #bd423a;
+    font-weight: bold;
+    text-align: right;
+  }
+
+  .name, .total {
+    flex: 1;
+  }
+
+  .total {
+    text-align: right;
+  }
+}

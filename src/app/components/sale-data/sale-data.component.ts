@@ -8,22 +8,32 @@ import {HttpClient} from '@angular/common/http';
 })
 export class SaleDataComponent implements OnInit
 {
+  saleData: SaleData;
+
+  countdown = 0;
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void
   {
-    // window['saleData'] = (res) => {
-    //
-    // };
-    this.httpClient.post('https://shop.immatchu.com/api/performance/real-time-stats', null, {
-      headers: {
-        'X-Token': 'YTQ2MGE4OTA5NzhiN2NkYmFmOTllMzdhYzNlNzY5MzQ='
+    setInterval(() => {
+      this.countdown--;
+      if (this.countdown <= 0) {
+        // this.getData();
+        this.countdown = 60;
       }
-    }).subscribe(res => {
-
-    }, e => console.error(e));
+    }, 1000);
 
   }
 
+
+  getData()
+  {
+    this.httpClient.post<any>(
+        'https://shop.immatchu.com/api/performance/real-time-stats', null,
+        {headers: {'X-Token': 'YTQ2MGE4OTA5NzhiN2NkYmFmOTllMzdhYzNlNzY5MzQ='}}
+    ).subscribe(res => {
+      this.saleData = res;
+    }, e => console.error(e));
+  }
 }

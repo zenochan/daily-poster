@@ -1,0 +1,47 @@
+<div class="header">
+  Daily Poster Integration
+  <div class="author">Powered By: <a href="mailto:zenochan@qq.com">Zeno Chan</a></div>
+</div>
+<div class="body">
+  <div>
+    <app-poster class="poster" [(poster)]="poster"></app-poster>
+
+    <div style="display: inline-block;margin-top: 12px">
+      <div class="items">
+        <div class="item"></div>
+        <div class="item">X</div>
+        <div class="item">Y</div>
+        <div class="item">W</div>
+      </div>
+
+      <div class="items" *ngFor="let item of preset">
+        <div class="item" (click)="setOptions(item)">{{item.name}}</div>
+        <div class="item">{{item.x}}</div>
+        <div class="item">{{item.y}}</div>
+        <div class="item">{{item.w}}</div>
+      </div>
+
+      <div class="items" *ngFor="let item of history">
+        <div class="item" (click)="setOptions(item)">{{item.name|date:'M.dd HH:mm'}}</div>
+        <div class="item">{{item.x}}</div>
+        <div class="item">{{item.y}}</div>
+        <div class="item">{{item.w}}</div>
+        <div class="item" style="padding: 0 24px;" (click)="delete(item)">✖删除️</div>
+      </div>
+
+      <div class="items">
+        <div class="item">自定义</div>
+        <div class="item"><input placeholder="x" [(ngModel)]="options.x" type="number" (change)="refresh()"/></div>
+        <div class="item"><input placeholder="y" [(ngModel)]="options.y" type="number" (change)="refresh()"/></div>
+        <div class="item"><input placeholder="w" [(ngModel)]="options.w" type="number" (change)="refresh()"/></div>
+      </div>
+
+
+      <button (click)="save()" class="submit">批量保存</button>
+    </div>
+  </div>
+
+  <app-qrcode class="qrcode" [poster]="poster" [options]="options"></app-qrcode>
+</div>
+
+
