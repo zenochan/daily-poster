@@ -20,6 +20,15 @@
         <div class="item">{{item.y}}</div>
         <div class="item">{{item.w}}</div>
       </div>
+
+      <div class="items" *ngFor="let item of history">
+        <div class="item" (click)="setOptions(item)">{{item.name|date:'M.dd HH:mm'}}</div>
+        <div class="item">{{item.x}}</div>
+        <div class="item">{{item.y}}</div>
+        <div class="item">{{item.w}}</div>
+        <div class="item" style="padding: 0 24px;" (click)="delete(item)">✖删除️</div>
+      </div>
+
       <div class="items">
         <div class="item">自定义</div>
         <div class="item"><input placeholder="x" [(ngModel)]="options.x" type="number" (change)="refresh()"/></div>

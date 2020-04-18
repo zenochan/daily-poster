@@ -1,12 +1,13 @@
-import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {DownloadService} from "../../download.service";
+import {Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {DownloadService} from '../../download.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-integration',
   templateUrl: './integration.component.html',
   styleUrls: ['./integration.component.scss']
 })
-export class IntegrationComponent implements OnInit, OnChanges
+export class IntegrationComponent implements OnInit, OnChanges, OnDestroy
 {
   @Input()
   poster: ImageInfo;
@@ -27,15 +28,25 @@ export class IntegrationComponent implements OnInit, OnChanges
     h: 480
   };
 
+  private sub1: Subscription;
+  private sub2: Subscription;
+
 
   constructor(private downloadService: DownloadService)
   {
-    downloadService.redrawEvent.subscribe(() => this.draw());
-    downloadService.downloadEvent.subscribe(() => this.save());
   }
 
   ngOnInit(): void
   {
+    this.sub1 = this.downloadService.redrawEvent.subscribe(() => this.draw());
+    this.sub2 = this.downloadService.downloadEvent.subscribe(() => this.save());
+  }
+
+  ngOnDestroy(): void
+  {
+    console.error('Destroy');
+    this.sub1.unsubscribe();
+    this.sub2.unsubscribe();
   }
 
   ngOnChanges(changes: SimpleChanges): void
