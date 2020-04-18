@@ -1,21 +1,25 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {PosterComponent} from './components/poster/poster.component';
-import { QrcodeComponent } from './components/qrcode/qrcode.component';
+import {QrcodeComponent} from './components/qrcode/qrcode.component';
 import {FormsModule} from '@angular/forms';
-import { IntegrationComponent } from './components/integration/integration.component';
+import {IntegrationComponent} from './components/integration/integration.component';
+import {SaleDataComponent} from './components/sale-data/sale-data.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
     AppComponent,
     PosterComponent,
     QrcodeComponent,
-    IntegrationComponent
+    IntegrationComponent,
+    SaleDataComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule
@@ -23,4 +27,4 @@ import { IntegrationComponent } from './components/integration/integration.compo
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
