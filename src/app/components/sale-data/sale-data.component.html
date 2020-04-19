@@ -2,6 +2,9 @@
   <div class="header">
     <div class="amount">{{saleData?.amount|number:'0.2'}}</div>
     <div>最后更新: {{saleData?.current_time|date:'HH:mm:ss'}}   ({{countdown}}s 后刷新)</div>
+    <div style="padding: 12px;border-radius: 4px;border: 2px solid white;color: white;font-size: 16px"
+         (click)="getData()">立刻刷新
+    </div>
   </div>
 
   <div class="sale-man__ctn" style="flex: 1;overflow: scroll">

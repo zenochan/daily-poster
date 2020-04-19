@@ -20,7 +20,6 @@ export class SaleDataComponent implements OnInit
       this.countdown--;
       if (this.countdown <= 0) {
         this.getData();
-        this.countdown = 60;
       }
     }, 1000);
 
@@ -29,11 +28,27 @@ export class SaleDataComponent implements OnInit
 
   getData()
   {
+    const token = location.search.replace('?', '');
+    if (!token) {
+      alert('token 无效');
+      return;
+    }
+
+    this.countdown = 60;
     this.httpClient.post<any>(
         'https://shop.immatchu.com/api/performance/real-time-stats', null,
-        {headers: {'X-Token': 'YTQ2MGE4OTA5NzhiN2NkYmFmOTllMzdhYzNlNzY5MzQ='}}
+        {headers: {'X-Token': token}}
     ).subscribe(res => {
-      this.saleData = res;
-    }, e => console.error(e));
+      if (res.errorCode) {
+        alert(res.message);
+        window.close();
+      } else {
+        res.current_time = res.current_time.replace(/-/g, '/');
+        this.saleData = res;
+      }
+    }, e => {
+      alert(e);
+      window.close();
+    });
   }
 }
