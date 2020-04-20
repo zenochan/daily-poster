@@ -42,3 +42,29 @@
     text-align: right;
   }
 }
+
+input {
+  display: block;
+  padding: 12px 15px;
+  width: 280px;
+  box-sizing: border-box;
+  background: white;
+  border-radius: 4px;
+  margin: 22px auto;
+  border: 1px solid #f1f1f1;
+}
+
+.login {
+  width: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #ff2020;
+  border-color: #ff2020;
+  color: #fff;
+  font-size: 16px;
+  height: 48px;
+  margin: auto;
+  border-radius: 4px;
+}

@@ -1,4 +1,4 @@
-<div style="display: flex;flex-direction: column;height: 100vh">
+<div style="display: flex;flex-direction: column;height: 100vh" *ngIf="token">
   <div class="header">
     <div class="amount">{{saleData?.amount|number:'0.2'}}</div>
     <div>最后更新: {{saleData?.current_time|date:'HH:mm:ss'}}   ({{countdown}}s 后刷新)</div>
@@ -14,4 +14,11 @@
       <div class="total">{{item.total_amount|number:'0.2'}}</div>
     </div>
   </div>
+</div>
+
+<div *ngIf="!token">
+  <input disabled [value]="username">
+  <input disabled type="password" [value]="password">
+  <input placeholder="输入验证码(6位)" [maxLength]="6" [(ngModel)]="msg" type="number">
+  <div class="login" (click)="login()">登录</div>
 </div>
